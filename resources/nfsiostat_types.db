@@ -1,0 +1,10 @@
+# Types for the nfsiostat puppet plugin
+# https://www.fsl.cs.stonybrook.edu/~mchen/mountstat-format.txt
+ops value:DERIVE:0:U
+trans value:DERIVE:0:U
+timeouts value:DERIVE:0:U
+bytes_sent value:DERIVE:0:U
+bytes_recv value:DERIVE:0:U
+queue value:DERIVE:0:U
+rtt value:DERIVE:0:U
+execute value:DERIVE:0:U
