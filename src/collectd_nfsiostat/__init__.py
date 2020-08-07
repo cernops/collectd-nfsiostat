@@ -104,9 +104,13 @@ def config_func(config):
 
     if NFS_OP_LIST is None:
         NFS_OP_LIST = DEFAULT_NFS_OP_LIST
-        collectd.info('nfsiostat plugin: using default list of NFS ops ({})'.format(NFS_OP_LIST))
+        collectd.info('nfsiostat plugin: using default list of NFS ops ({})' \
+                        .format(NFS_OP_LIST)
+                     )
 
-    collectd.info('nfsiostat plugin: configured to monitor {}'.format(MOUNT_POINTS))
+    collectd.info('nfsiostat plugin: configured to monitor {} on {}' \
+                    .format(NFS_OP_LIST, MOUNT_POINTS)
+                 )
 
 def read_func():
     data = parse_proc_mountstats(MOUNT_POINTS)
