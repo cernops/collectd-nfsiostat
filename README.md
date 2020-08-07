@@ -54,6 +54,8 @@ node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-READ
 Please note that all the metrics are
 [`DERIVE`s](https://collectd.org/wiki/index.php/Data_source).
 
+The meaning of each measurement (`ops`, `rtt`, etc) can be found
+[here](https://www.fsl.cs.stonybrook.edu/~mchen/mountstat-format.txt).
 
 ## Authors
 * Nacho Barrientos <nacho.barrientos@cern.ch>
