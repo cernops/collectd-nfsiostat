@@ -9,6 +9,12 @@ variables:
 
 include: 'https://gitlab.cern.ch/linuxsupport/rpmci/raw/master/rpm-ci.yml'
 
+pylint:
+  stage: prebuild
+  script:
+    - yum install -y --nogpgcheck pylint collectd
+    - pylint -E src/collectd_nfsiostat/__init__.py
+
 .test_install:
   script:
     - rpm -qa python*-collectd_nfsiostat --scripts | grep "condrestart"
