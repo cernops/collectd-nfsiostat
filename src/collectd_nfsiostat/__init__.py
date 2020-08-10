@@ -134,7 +134,7 @@ def read_func():
                     sources.append((op_name, 'errs', op_counters['errs']))
 
                 for type_instance, _type, value in sources:
-                    collectd.Values(plugin='nfsiostats',
+                    collectd.Values(plugin='nfsiostat',
                                     type=_type,
                                     plugin_instance=plugin_instance,
                                     type_instance=type_instance,
