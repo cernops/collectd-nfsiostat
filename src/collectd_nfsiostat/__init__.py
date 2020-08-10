@@ -131,7 +131,7 @@ def read_func():
                 ]
 
                 if 'errs' in op_counters:
-                  sources.append((op_name, 'errs', op_counters['errs']))
+                    sources.append((op_name, 'errs', op_counters['errs']))
 
                 for type_instance, _type, value in sources:
                     collectd.Values(plugin='nfsiostats',
