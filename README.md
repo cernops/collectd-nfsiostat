@@ -44,21 +44,21 @@ collected as [`DERIVE`s](https://collectd.org/wiki/index.php/Data_source).
 Example:
 
 ```
-node.example.org/nfsiostats-mnt_puppetnfsdir/execute-ACCESS
-node.example.org/nfsiostats-mnt_puppetnfsdir/execute-GETATTR
-node.example.org/nfsiostats-mnt_puppetnfsdir/execute-READ
-node.example.org/nfsiostats-mnt_puppetnfsdir/ops-ACCESS
-node.example.org/nfsiostats-mnt_puppetnfsdir/ops-GETATTR
-node.example.org/nfsiostats-mnt_puppetnfsdir/ops-READ
-node.example.org/nfsiostats-mnt_puppetnfsdir/queue-ACCESS
-node.example.org/nfsiostats-mnt_puppetnfsdir/queue-GETATTR
-node.example.org/nfsiostats-mnt_puppetnfsdir/queue-READ
-node.example.org/nfsiostats-mnt_puppetnfsdir/rtt-ACCESS
-node.example.org/nfsiostats-mnt_puppetnfsdir/rtt-GETATTR
-node.example.org/nfsiostats-mnt_puppetnfsdir/rtt-READ
-node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-ACCESS
-node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-GETATTR
-node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-READ
+node.example.org/nfsiostat-mnt_puppetnfsdir/execute-ACCESS
+node.example.org/nfsiostat-mnt_puppetnfsdir/execute-GETATTR
+node.example.org/nfsiostat-mnt_puppetnfsdir/execute-READ
+node.example.org/nfsiostat-mnt_puppetnfsdir/ops-ACCESS
+node.example.org/nfsiostat-mnt_puppetnfsdir/ops-GETATTR
+node.example.org/nfsiostat-mnt_puppetnfsdir/ops-READ
+node.example.org/nfsiostat-mnt_puppetnfsdir/queue-ACCESS
+node.example.org/nfsiostat-mnt_puppetnfsdir/queue-GETATTR
+node.example.org/nfsiostat-mnt_puppetnfsdir/queue-READ
+node.example.org/nfsiostat-mnt_puppetnfsdir/rtt-ACCESS
+node.example.org/nfsiostat-mnt_puppetnfsdir/rtt-GETATTR
+node.example.org/nfsiostat-mnt_puppetnfsdir/rtt-READ
+node.example.org/nfsiostat-mnt_puppetnfsdir/timeouts-ACCESS
+node.example.org/nfsiostat-mnt_puppetnfsdir/timeouts-GETATTR
+node.example.org/nfsiostat-mnt_puppetnfsdir/timeouts-READ
 ```
 
 More information about the metrics being fetched can be found
