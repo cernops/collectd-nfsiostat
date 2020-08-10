@@ -1,4 +1,6 @@
 ---
+image: gitlab-registry.cern.ch/linuxsupport/c8-base
+
 variables:
   BUILD_8: 'True'
   BUILD_7: 'True'
@@ -6,14 +8,17 @@ variables:
   KOJI_TAG_7: 'ai7'
   KOJI_TAG_8: 'collectd8'
   DIST_7: '.ai7'
+  EPEL_REPO: 'http://linuxsoft.cern.ch/epel/8/Everything/x86_64/'
 
 include: 'https://gitlab.cern.ch/linuxsupport/rpmci/raw/master/rpm-ci.yml'
 
 pylint:
   stage: prebuild
   script:
-    - yum install -y --nogpgcheck pylint collectd
-    - pylint -E src/collectd_nfsiostat/__init__.py
+    - dnf install -y --nogpgcheck yum-utils
+    - yum-config-manager --add-repo $EPEL_REPO
+    - yum install -y --nogpgcheck python3-pylint
+    - pylint-3 -E src/collectd_nfsiostat/__init__.py
 
 .test_install:
   script:

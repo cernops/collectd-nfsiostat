@@ -29,7 +29,7 @@ To configure with collectd
 
 
 import re
-import collectd
+import collectd # pylint: disable=import-error
 
 DEFAULT_INPUT_FILE = '/proc/self/mountstats'
 DEFAULT_NFS_OP_LIST = ['GETATTR', 'READ', 'ACCESS']
