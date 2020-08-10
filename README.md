@@ -28,8 +28,18 @@ TypesDB "/usr/share/collectd/nfsiostat_types.db"
 
 ## Generated data
 
-The plugin reads ``/proc/self/mountstats`` and reports several single values
-extracted from there for each configured NFS operation.
+The plugin reads `/proc/self/mountstats` and reports several single values for
+each configured NFS operation. At the moment the following metrics are being
+retrieved:
+
+* `ops`: How many ops of this type have been requested
+* `timeouts`: How many timeouts of this op type have occurred
+* `queue`: How long ops of this type have waited in queue before being transmitted (ms)
+* `rtt`: How long the client waited to receive replies of this op type from the server (ms)
+* `execute`: How long ops of this type take to execute (ms)
+
+Please note that all the metrics are
+collected as [`DERIVE`s](https://collectd.org/wiki/index.php/Data_source).
 
 Example:
 
@@ -51,10 +61,7 @@ node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-GETATTR
 node.example.org/nfsiostats-mnt_puppetnfsdir/timeouts-READ
 ```
 
-Please note that all the metrics are
-[`DERIVE`s](https://collectd.org/wiki/index.php/Data_source).
-
-The meaning of each measurement (`ops`, `rtt`, etc) can be found
+More information about the metrics being fetched can be found
 [here](https://www.fsl.cs.stonybrook.edu/~mchen/mountstat-format.txt).
 
 ## Authors
