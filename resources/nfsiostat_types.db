@@ -8,3 +8,4 @@ bytes_recv value:DERIVE:0:U
 queue value:DERIVE:0:U
 rtt value:DERIVE:0:U
 execute value:DERIVE:0:U
+errs value:DERIVE:0:U

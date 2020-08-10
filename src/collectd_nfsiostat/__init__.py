@@ -49,6 +49,8 @@ OP_COUNTER_INDEX_TO_NAME = {
     5: 'queue',
     6: 'rtt',
     7: 'execute',
+    # CentOS8's kernel and beyond
+    8: 'errs',
 }
 
 def parse_nfs_attrs(raw):
@@ -127,6 +129,9 @@ def read_func():
                     (op_name, 'rtt', op_counters['rtt']),
                     (op_name, 'execute', op_counters['execute']),
                 ]
+
+                if 'errs' in op_counters:
+                  sources.append((op_name, 'errs', op_counters['errs']))
 
                 for type_instance, _type, value in sources:
                     collectd.Values(plugin='nfsiostats',
