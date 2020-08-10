@@ -17,8 +17,15 @@ pylint:
   script:
     - dnf install -y --nogpgcheck yum-utils
     - yum-config-manager --add-repo $EPEL_REPO
-    - yum install -y --nogpgcheck python3-pylint
+    - yum install -y --nogpgcheck python3-pylint python3-mock
     - pylint-3 -E src/collectd_nfsiostat/__init__.py
+    - PYTHONPATH=src pylint-3 -E t/*.py
+
+nosetests:
+  stage: prebuild
+  script:
+    - yum install -y --nogpgcheck python3-mock python3-nose
+    - PYTHONPATH=src python3 -m nose t
 
 .test_install:
   script:
