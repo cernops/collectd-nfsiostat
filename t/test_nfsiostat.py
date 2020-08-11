@@ -81,3 +81,25 @@ def test_read_ok_rhel8(mock_values):
         ],
         any_order=True
     )
+
+@patch('collectd.Values')
+def test_read_ok_rhel7_multi(mock_values):
+    import collectd_nfsiostat
+    collectd_nfsiostat.config_func(generate_config('t/input/RHEL7_multi', ('/mnt/foo', '/mnt/foo2'), ('READ',)))
+    collectd_nfsiostat.read_func()
+    assert mock_values.call_count == 10
+    mock_values.assert_has_calls(
+        [
+            call(plugin='nfsiostat', type='ops', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='queue', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='execute', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='ops', plugin_instance='mnt_foo2', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_foo2', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='queue', plugin_instance='mnt_foo2', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_foo2', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='execute', plugin_instance='mnt_foo2', type_instance='READ', meta={'schema_version': 1}),
+        ],
+        any_order=True
+    )

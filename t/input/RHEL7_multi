@@ -1,0 +1,97 @@
+device rootfs mounted on / with fstype rootfs
+device sysfs mounted on /sys with fstype sysfs
+device proc mounted on /proc with fstype proc
+device devtmpfs mounted on /dev with fstype devtmpfs
+device securityfs mounted on /sys/kernel/security with fstype securityfs
+device tmpfs mounted on /dev/shm with fstype tmpfs
+device devpts mounted on /dev/pts with fstype devpts
+device tmpfs mounted on /run with fstype tmpfs
+device tmpfs mounted on /sys/fs/cgroup with fstype tmpfs
+device cgroup mounted on /sys/fs/cgroup/systemd with fstype cgroup
+device pstore mounted on /sys/fs/pstore with fstype pstore
+device cgroup mounted on /sys/fs/cgroup/cpu,cpuacct with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/cpuset with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/memory with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/net_cls,net_prio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/blkio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/freezer with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/hugetlb with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/devices with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/pids with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/perf_event with fstype cgroup
+device configfs mounted on /sys/kernel/config with fstype configfs
+device /dev/vda1 mounted on / with fstype xfs
+device selinuxfs mounted on /sys/fs/selinux with fstype selinuxfs
+device debugfs mounted on /sys/kernel/debug with fstype debugfs
+device mqueue mounted on /dev/mqueue with fstype mqueue
+device hugetlbfs mounted on /dev/hugepages with fstype hugetlbfs
+device sunrpc mounted on /var/lib/nfs/rpc_pipefs with fstype rpc_pipefs
+device tmpfs mounted on /run/user/0 with fstype tmpfs
+device server.example.org:/export/vol mounted on /mnt/foo with fstype nfs statvers=1.1
+	opts:
+  ro,vers=3,rsize=1048576,wsize=1048576,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=127.0.0.1,mountvers=3,mountport=4002,mountproto=udp,local_lock=none
+	age:	15712511
+	caps:	caps=0x3fcf,wtmult=4096,dtsize=4096,bsize=0,namlen=255
+	sec:	flavor=1,pseudoflavor=1
+	events:	2464505777 194768358889 2350957 9097 1343480891 107047830 238794426195 0 36110 52997455 0 5104260875 464933124 0 1111026491 0 0 1111014329 0 0 0 0 0 0 0 0 0 
+	bytes:	1763097055190 0 0 0 168817843723 0 77627218 0 
+	RPC iostats version: 1.0  p/v: 100003/3 (nfs)
+	xprt:	tcp 892 1 18 0 0 4288573804 4288573134 647 2468910349420 0 31 16183580 194863799
+	per-op statistics
+	        NULL: 0 0 0 0 0 0 0 0
+	     GETATTR: 2464505780 2464506133 172 295740732148 276024637700 41758335 879279887 985731260
+	     SETATTR: 0 0 0 0 0 0 0 0
+	      LOOKUP: 107098086 107098090 2 14946519252 14639067840 785681 38090431 42650802
+	      ACCESS: 1354537936 1354538257 149 167959556840 162544552056 31582879 452682738 515049076
+	    READLINK: 283001978 283001978 0 33960237360 46528916880 997051 93387477 101734085
+	        READ: 53009339 53009339 0 6997232748 175681200784 2743994 22030694 27335011
+	       WRITE: 0 0 0 0 0 0 0 0
+	      CREATE: 0 0 0 0 0 0 0 0
+	       MKDIR: 0 0 0 0 0 0 0 0
+	     SYMLINK: 0 0 0 0 0 0 0 0
+	       MKNOD: 0 0 0 0 0 0 0 0
+	      REMOVE: 0 0 0 0 0 0 0 0
+	       RMDIR: 0 0 0 0 0 0 0 0
+	      RENAME: 0 0 0 0 0 0 0 0
+	        LINK: 0 0 0 0 0 0 0 0
+	     READDIR: 22 22 0 3080 41728 0 381 382
+	 READDIRPLUS: 26419585 26419593 4 3804421392 66397977156 804938 12365795 14066839
+	      FSSTAT: 398 398 0 41748 33432 4 170 227
+	      FSINFO: 3 3 0 312 240 0 1 2
+	    PATHCONF: 1 1 0 104 56 0 0 0
+	      COMMIT: 0 0 0 0 0 0 0 0
+
+device server.example.org:/export/vol mounted on /mnt/foo2 with fstype nfs statvers=1.1
+	opts:
+  ro,vers=3,rsize=1048576,wsize=1048576,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=127.0.0.1,mountvers=3,mountport=4002,mountproto=udp,local_lock=none
+	age:	15712511
+	caps:	caps=0x3fcf,wtmult=4096,dtsize=4096,bsize=0,namlen=255
+	sec:	flavor=1,pseudoflavor=1
+	events:	2464505777 194768358889 2350957 9097 1343480891 107047830 238794426195 0 36110 52997455 0 5104260875 464933124 0 1111026491 0 0 1111014329 0 0 0 0 0 0 0 0 0 
+	bytes:	1763097055190 0 0 0 168817843723 0 77627218 0 
+	RPC iostats version: 1.0  p/v: 100003/3 (nfs)
+	xprt:	tcp 892 1 18 0 0 4288573804 4288573134 647 2468910349420 0 31 16183580 194863799
+	per-op statistics
+	        NULL: 0 0 0 0 0 0 0 0
+	     GETATTR: 2464505780 2464506133 172 295740732148 276024637700 41758335 879279887 985731260
+	     SETATTR: 0 0 0 0 0 0 0 0
+	      LOOKUP: 107098086 107098090 2 14946519252 14639067840 785681 38090431 42650802
+	      ACCESS: 1354537936 1354538257 149 167959556840 162544552056 31582879 452682738 515049076
+	    READLINK: 283001978 283001978 0 33960237360 46528916880 997051 93387477 101734085
+	        READ: 53009339 53009339 0 6997232748 175681200784 2743994 22030694 27335011
+	       WRITE: 0 0 0 0 0 0 0 0
+	      CREATE: 0 0 0 0 0 0 0 0
+	       MKDIR: 0 0 0 0 0 0 0 0
+	     SYMLINK: 0 0 0 0 0 0 0 0
+	       MKNOD: 0 0 0 0 0 0 0 0
+	      REMOVE: 0 0 0 0 0 0 0 0
+	       RMDIR: 0 0 0 0 0 0 0 0
+	      RENAME: 0 0 0 0 0 0 0 0
+	        LINK: 0 0 0 0 0 0 0 0
+	     READDIR: 22 22 0 3080 41728 0 381 382
+	 READDIRPLUS: 26419585 26419593 4 3804421392 66397977156 804938 12365795 14066839
+	      FSSTAT: 398 398 0 41748 33432 4 170 227
+	      FSINFO: 3 3 0 312 240 0 1 2
+	    PATHCONF: 1 1 0 104 56 0 0 0
+	      COMMIT: 0 0 0 0 0 0 0 0
+device systemd-1 mounted on /proc/sys/fs/binfmt_misc with fstype autofs
