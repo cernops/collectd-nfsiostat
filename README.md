@@ -4,6 +4,10 @@ This is a Collectd plugin to pull data about NFS mounts from
 `/proc/self/mountstats` (similarly to what `nfsiostat` does). It is written in
 Python and as such, runs under the collectd Python plugin.
 
+Comparing it to [the official NFS
+plugin](https://collectd.org/wiki/index.php/Plugin:NFS), it provides extra NFS
+RPC metrics like the timeouts or the RTT per operation.
+
 ## Configuration 
 
 ```xml
