@@ -99,7 +99,6 @@ def parse_proc_mountstats(mount_points, path):
 def config_func(config):
     """ accept configuration from collectd """
     global INPUT_FILE, MOUNT_POINTS, NFS_OP_LIST
-    INPUT_FILE = MOUNT_POINTS = NFS_OP_LIST = None
     for node in config.children:
         key = node.key
         if key == 'MountStatsPath':
