@@ -34,6 +34,7 @@ import collectd # pylint: disable=import-error
 DEFAULT_INPUT_FILE = '/proc/self/mountstats'
 DEFAULT_NFS_OP_LIST = ['GETATTR', 'READ', 'ACCESS']
 
+INPUT_FILE = None
 MOUNT_POINTS = None
 NFS_OP_LIST = None
 
@@ -70,7 +71,7 @@ def parse_nfs_per_op_stats(raw):
             parsed_per_op_stats[data.group('op_name')] = parsed_counter_values
     return parsed_per_op_stats
 
-def parse_proc_mountstats(mount_points, path=DEFAULT_INPUT_FILE):
+def parse_proc_mountstats(mount_points, path):
     device_data = {}
 
     try:
@@ -95,7 +96,10 @@ def config_func(config):
     """ accept configuration from collectd """
     for node in config.children:
         key = node.key
-        if key == 'Mountpoints':
+        if key == 'MountStatsPath':
+            global INPUT_FILE
+            INPUT_FILE = node.values
+        elif key == 'Mountpoints':
             global MOUNT_POINTS
             MOUNT_POINTS = [str(v) for v in node.values]
         elif key == 'NFSOps':
@@ -103,6 +107,12 @@ def config_func(config):
             NFS_OP_LIST = [str(v) for v in node.values]
         else:
             collectd.info('nfsiostat plugin: Unknown config key "%s"' % key)
+
+    if INPUT_FILE is None:
+        INPUT_FILE = DEFAULT_INPUT_FILE
+        collectd.info('nfsiostat plugin: using default input file ({})' \
+                        .format(INPUT_FILE)
+                     )
 
     if NFS_OP_LIST is None:
         NFS_OP_LIST = DEFAULT_NFS_OP_LIST
@@ -115,7 +125,7 @@ def config_func(config):
                  )
 
 def read_func():
-    data = parse_proc_mountstats(MOUNT_POINTS)
+    data = parse_proc_mountstats(MOUNT_POINTS, INPUT_FILE)
     if len(data) < len(MOUNT_POINTS):
         collectd.info('nfsiostat plugin: couldn\'t fetch data for all configured mount points')
     for mount_point, values in data.items():
