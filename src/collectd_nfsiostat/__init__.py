@@ -85,10 +85,13 @@ def parse_proc_mountstats(mount_points, path):
     for raw_device in devices:
         raw_device = raw_device.strip().split('\n')
         if raw_device[0]:
-            mount_point = raw_device[0].split(' ')[3]
-            fstype = raw_device[0].split(' ')[6]
-            if mount_point in mount_points and fstype == 'nfs':
-                device_data[mount_point] = parse_nfs_attrs(raw_device[1:])
+            mount_info = raw_device[0].split(' ')
+            if len(mount_info) > 6:
+                mount_point, fstype = mount_info[3], mount_info[6]
+                if mount_point in mount_points and fstype == 'nfs':
+                    device_data[mount_point] = parse_nfs_attrs(raw_device[1:])
+            else:
+                collectd.error('Unexpected mount information line length')
 
     return device_data
 
