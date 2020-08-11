@@ -68,6 +68,15 @@ node.example.org/nfsiostat-mnt_puppetnfsdir/timeouts-READ
 More information about the metrics being fetched can be found
 [here](https://www.fsl.cs.stonybrook.edu/~mchen/mountstat-format.txt).
 
+## Example visualisations
+
+### InfluxDB + Grafana
+
+Some plots using InfluxDB as time-series database and Grafana as visualisation
+tool:
+
+![Grafana plots](./img/grafana_example.png)
+
 ## Authors
 * Nacho Barrientos <nacho.barrientos@cern.ch>
 
