@@ -11,7 +11,6 @@ class MockCollectd(MagicMock):
     def log(log_str):
         print(log_str)
 
-    values = None
     warning = log
     error = log
     info = log
