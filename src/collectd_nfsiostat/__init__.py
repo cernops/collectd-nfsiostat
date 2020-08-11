@@ -81,7 +81,7 @@ def parse_proc_mountstats(mount_points, path):
         collectd.info('Unable to open {} for reading ({})'.format(path, error))
         return device_data
 
-    devices = content.split('device ')
+    devices = content.split('\ndevice ')
     for raw_device in devices:
         raw_device = raw_device.strip().split('\n')
         if raw_device[0]:
