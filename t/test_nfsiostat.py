@@ -116,3 +116,20 @@ def test_rhel7_no_mountpoints_configured(mock_values, mock_error):
         collectd_nfsiostat.read_func()
         parse_proc_mountstats_mock.assert_not_called()
         mock_values.assert_not_called()
+
+@patch('collectd.Values')
+def test_read_ok_rhel7_unknown_ops_are_ignored(mock_values):
+    import collectd_nfsiostat
+    collectd_nfsiostat.config_func(generate_config('t/input/RHEL7', ('/mnt/foo',), ('READ', 'FOO')))
+    collectd_nfsiostat.read_func()
+    assert mock_values.call_count == 5
+    mock_values.assert_has_calls(
+        [
+            call(plugin='nfsiostat', type='ops', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='queue', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='execute', plugin_instance='mnt_foo', type_instance='READ', meta={'schema_version': 1}),
+        ],
+        any_order=True
+    )
