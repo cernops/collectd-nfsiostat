@@ -57,3 +57,27 @@ def test_read_ok_rhel7(mock_values):
         ],
         any_order=True
     )
+
+@patch('collectd.Values')
+def test_read_ok_rhel8(mock_values):
+    import collectd_nfsiostat
+    collectd_nfsiostat.config_func(generate_config('t/input/RHEL8', ('/mnt/bar',), ('ACCESS', 'READLINK')))
+    collectd_nfsiostat.read_func()
+    assert mock_values.call_count == 12
+    mock_values.assert_has_calls(
+        [
+            call(plugin='nfsiostat', type='ops', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='queue', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='execute', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='errs', plugin_instance='mnt_bar', type_instance='ACCESS', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='ops', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='queue', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='execute', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+            call(plugin='nfsiostat', type='errs', plugin_instance='mnt_bar', type_instance='READLINK', meta={'schema_version': 1}),
+        ],
+        any_order=True
+    )

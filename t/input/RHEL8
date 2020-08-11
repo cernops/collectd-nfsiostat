@@ -1,0 +1,76 @@
+device sysfs mounted on /sys with fstype sysfs
+device proc mounted on /proc with fstype proc
+device devtmpfs mounted on /dev with fstype devtmpfs
+device securityfs mounted on /sys/kernel/security with fstype securityfs
+device tmpfs mounted on /dev/shm with fstype tmpfs
+device devpts mounted on /dev/pts with fstype devpts
+device tmpfs mounted on /run with fstype tmpfs
+device tmpfs mounted on /sys/fs/cgroup with fstype tmpfs
+device cgroup mounted on /sys/fs/cgroup/systemd with fstype cgroup
+device pstore mounted on /sys/fs/pstore with fstype pstore
+device bpf mounted on /sys/fs/bpf with fstype bpf
+device cgroup mounted on /sys/fs/cgroup/freezer with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/cpu,cpuacct with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/pids with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/net_cls,net_prio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/devices with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/hugetlb with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/memory with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/rdma with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/perf_event with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/blkio with fstype cgroup
+device cgroup mounted on /sys/fs/cgroup/cpuset with fstype cgroup
+device configfs mounted on /sys/kernel/config with fstype configfs
+device /dev/vda1 mounted on / with fstype xfs
+device selinuxfs mounted on /sys/fs/selinux with fstype selinuxfs
+device systemd-1 mounted on /proc/sys/fs/binfmt_misc with fstype autofs
+device hugetlbfs mounted on /dev/hugepages with fstype hugetlbfs
+device mqueue mounted on /dev/mqueue with fstype mqueue
+device debugfs mounted on /sys/kernel/debug with fstype debugfs
+device binfmt_misc mounted on /proc/sys/fs/binfmt_misc with fstype binfmt_misc
+device /dev/vda15 mounted on /boot/efi with fstype vfat
+device /dev/vda2 mounted on /tmp with fstype ext4
+device /dev/vda2 mounted on /var/tmp with fstype ext4
+device sunrpc mounted on /var/lib/nfs/rpc_pipefs with fstype rpc_pipefs
+device server.example.org:/export/vol mounted on /mnt/bar with fstype nfs statvers=1.1
+	opts:
+  ro,vers=3,rsize=1048576,wsize=1048576,namlen=255,acregmin=3,acregmax=60,acdirmin=30,acdirmax=60,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=127.0.0.1,mountvers=3,mountport=4002,mountproto=udp,local_lock=none
+	age:	4022591
+	caps:	caps=0x3fcf,wtmult=4096,dtsize=4096,bsize=0,namlen=255
+	sec:	flavor=1,pseudoflavor=1
+	events:	67470 1660616 12 11 63656 4742 2112153 0 242 49128 0 438 28251 0 49485 0 0 49485 0 0 0 0 0 0 0 0 0 
+	bytes:	701768308 0 0 0 695155197 0 206001 0 
+	RPC iostats version: 1.1  p/v: 100003/3 (nfs)
+	xprt:	tcp 725 1 2976 1 0 206249 206249 0 209347 0 27 884 2418
+	per-op statistics
+	        NULL: 1 1 0 44 24 24 0 35 0
+	     GETATTR: 67472 67472 0 8052920 7556864 2614 24262 28219 0
+	     SETATTR: 0 0 0 0 0 0 0 0 0
+	      LOOKUP: 4751 4751 0 622436 1113332 13 1329 1440 217
+	      ACCESS: 66345 66345 0 8227312 7961400 198 18258 19567 0
+	    READLINK: 1705 1705 0 204772 283168 6 479 538 0
+	        READ: 49549 49549 0 6540588 701571304 2398 28693 32732 0
+	       WRITE: 0 0 0 0 0 0 0 0 0
+	      CREATE: 0 0 0 0 0 0 0 0 0
+	       MKDIR: 0 0 0 0 0 0 0 0 0
+	     SYMLINK: 0 0 0 0 0 0 0 0 0
+	       MKNOD: 0 0 0 0 0 0 0 0 0
+	      REMOVE: 0 0 0 0 0 0 0 0 0
+	       RMDIR: 0 0 0 0 0 0 0 0 0
+	      RENAME: 0 0 0 0 0 0 0 0 0
+	        LINK: 0 0 0 0 0 0 0 0 0
+	     READDIR: 1 1 0 140 1428 0 0 0 0
+	 READDIRPLUS: 14817 14817 0 2133724 17392412 54 9733 10163 0
+	      FSSTAT: 1604 1604 0 167316 134736 67 889 1015 0
+	      FSINFO: 2 2 0 208 160 0 0 2 0
+	    PATHCONF: 1 1 0 104 56 0 0 11 0
+	      COMMIT: 0 0 0 0 0 0 0 0 0
+
+device AFS mounted on /afs with fstype afs
+device /etc/auto.misc mounted on /misc with fstype autofs
+device -hosts mounted on /net with fstype autofs
+device /etc/auto.cvmfs mounted on /cvmfs with fstype autofs
+device tmpfs mounted on /run/user/16568 with fstype tmpfs
+device tmpfs mounted on /run/user/15952 with fstype tmpfs
+device fusectl mounted on /sys/fs/fuse/connections with fstype fusectl
+device tmpfs mounted on /run/user/0 with fstype tmpfs
