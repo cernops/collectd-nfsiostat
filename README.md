@@ -74,9 +74,6 @@ More information about the metrics being fetched can be found
 ## Copyright
 2020 CERN
 
-## License
-Apache-II License
-
 ## Development notes
 Don't forget to bump the `schema_version` if you modify the data format. You
 should be able to fish out up-to-date instructions on how to run the test suite
