@@ -24,6 +24,7 @@ def generate_config(input_file=None, mount_points=None, nfs_ops=None):
     mock_config_default_values = Mock()
     mock_config_default_values.children = [
     ]
+
     if input_file:
         mock_config_default_values.children.append(
             ConfigOption('MountStatsPath', input_file)
@@ -103,3 +104,15 @@ def test_read_ok_rhel7_multi(mock_values):
         ],
         any_order=True
     )
+
+@patch('collectd.error')
+@patch('collectd.Values')
+def test_rhel7_no_mountpoints_configured(mock_values, mock_error):
+    import collectd_nfsiostat
+    collectd_nfsiostat.config_func(generate_config('t/input/RHEL7', None, ('DOESTNOTMATTER',)))
+    mock_error.assert_called_with('nfsiostat plugin: mount points not configured')
+    with patch('collectd_nfsiostat.parse_proc_mountstats') as \
+        parse_proc_mountstats_mock:
+        collectd_nfsiostat.read_func()
+        parse_proc_mountstats_mock.assert_not_called()
+        mock_values.assert_not_called()

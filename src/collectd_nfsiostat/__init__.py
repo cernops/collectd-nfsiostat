@@ -94,16 +94,15 @@ def parse_proc_mountstats(mount_points, path):
 
 def config_func(config):
     """ accept configuration from collectd """
+    global INPUT_FILE, MOUNT_POINTS, NFS_OP_LIST
+    INPUT_FILE = MOUNT_POINTS = NFS_OP_LIST = None
     for node in config.children:
         key = node.key
         if key == 'MountStatsPath':
-            global INPUT_FILE
             INPUT_FILE = node.values
         elif key == 'Mountpoints':
-            global MOUNT_POINTS
             MOUNT_POINTS = [str(v) for v in node.values]
         elif key == 'NFSOps':
-            global NFS_OP_LIST
             NFS_OP_LIST = [str(v) for v in node.values]
         else:
             collectd.info('nfsiostat plugin: Unknown config key "%s"' % key)
@@ -120,35 +119,39 @@ def config_func(config):
                         .format(NFS_OP_LIST)
                      )
 
-    collectd.info('nfsiostat plugin: configured to monitor {} on {}' \
-                    .format(NFS_OP_LIST, MOUNT_POINTS)
-                 )
+    if MOUNT_POINTS:
+        collectd.info('nfsiostat plugin: configured to monitor {} on {}' \
+                        .format(NFS_OP_LIST, MOUNT_POINTS)
+                     )
+    else:
+        collectd.error('nfsiostat plugin: mount points not configured')
 
 def read_func():
-    data = parse_proc_mountstats(MOUNT_POINTS, INPUT_FILE)
-    if len(data) < len(MOUNT_POINTS):
-        collectd.info('nfsiostat plugin: couldn\'t fetch data for all configured mount points')
-    for mount_point, values in data.items():
-        if 'per-op statistics' in values:
-            for op_name, op_counters in values['per-op statistics'].items():
-                plugin_instance = mount_point[1:].replace('/', '_')
-                sources = [
-                    (op_name, 'ops', op_counters['ops']),
-                    (op_name, 'timeouts', op_counters['timeouts']),
-                    (op_name, 'queue', op_counters['queue']),
-                    (op_name, 'rtt', op_counters['rtt']),
-                    (op_name, 'execute', op_counters['execute']),
-                ]
+    if MOUNT_POINTS:
+        data = parse_proc_mountstats(MOUNT_POINTS, INPUT_FILE)
+        if len(data) < len(MOUNT_POINTS):
+            collectd.info('nfsiostat plugin: couldn\'t fetch data for all configured mount points')
+        for mount_point, values in data.items():
+            if 'per-op statistics' in values:
+                for op_name, op_counters in values['per-op statistics'].items():
+                    plugin_instance = mount_point[1:].replace('/', '_')
+                    sources = [
+                        (op_name, 'ops', op_counters['ops']),
+                        (op_name, 'timeouts', op_counters['timeouts']),
+                        (op_name, 'queue', op_counters['queue']),
+                        (op_name, 'rtt', op_counters['rtt']),
+                        (op_name, 'execute', op_counters['execute']),
+                    ]
 
-                if 'errs' in op_counters:
-                    sources.append((op_name, 'errs', op_counters['errs']))
+                    if 'errs' in op_counters:
+                        sources.append((op_name, 'errs', op_counters['errs']))
 
-                for type_instance, _type, value in sources:
-                    collectd.Values(plugin='nfsiostat',
-                                    type=_type,
-                                    plugin_instance=plugin_instance,
-                                    type_instance=type_instance,
-                                    meta=META).dispatch(values=[value])
+                    for type_instance, _type, value in sources:
+                        collectd.Values(plugin='nfsiostat',
+                                        type=_type,
+                                        plugin_instance=plugin_instance,
+                                        type_instance=type_instance,
+                                        meta=META).dispatch(values=[value])
 
 collectd.register_config(config_func)
 collectd.register_read(read_func)
