@@ -33,6 +33,7 @@ import collectd # pylint: disable=import-error
 
 DEFAULT_INPUT_FILE = '/proc/self/mountstats'
 DEFAULT_NFS_OP_LIST = ['GETATTR', 'READ', 'ACCESS']
+DEFAULT_COUNTERS_PER_OP = ['ops', 'timeouts', 'queue', 'rtt', 'execute', 'errs']
 
 INPUT_FILE = None
 MOUNT_POINTS = None
@@ -138,16 +139,11 @@ def read_func():
             if 'per-op statistics' in values:
                 for op_name, op_counters in values['per-op statistics'].items():
                     plugin_instance = mount_point[1:].replace('/', '_')
-                    sources = [
-                        (op_name, 'ops', op_counters['ops']),
-                        (op_name, 'timeouts', op_counters['timeouts']),
-                        (op_name, 'queue', op_counters['queue']),
-                        (op_name, 'rtt', op_counters['rtt']),
-                        (op_name, 'execute', op_counters['execute']),
-                    ]
 
-                    if 'errs' in op_counters:
-                        sources.append((op_name, 'errs', op_counters['errs']))
+                    sources = []
+                    for counter_name in DEFAULT_COUNTERS_PER_OP:
+                        if counter_name in op_counters:
+                           sources.append(((op_name, counter_name, op_counters[counter_name])))
 
                     for type_instance, _type, value in sources:
                         collectd.Values(plugin='nfsiostat',
