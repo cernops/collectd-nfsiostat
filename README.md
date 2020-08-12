@@ -8,6 +8,9 @@ Comparing it to [the official NFS
 plugin](https://collectd.org/wiki/index.php/Plugin:NFS), it provides extra NFS
 RPC metrics like the timeouts or the RTT per operation.
 
+It supports NFSv3 and NFSv4 mounts on RHEL7-based and RHEL8-based systems
+although it should work fine on other Linux distributions.
+
 ## Configuration 
 
 ```xml
