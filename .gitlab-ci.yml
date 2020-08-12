@@ -25,7 +25,7 @@ nosetests:
   stage: prebuild
   script:
     - yum install -y --nogpgcheck python3-mock python3-nose
-    - PYTHONPATH=src python3 -m nose t
+    - PYTHONPATH=src python3 -m nose t.test_nfsiostat:NFSIoStatTest
 
 .test_install:
   script:
