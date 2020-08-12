@@ -58,7 +58,7 @@ def parse_nfs_attrs(raw):
 def parse_nfs_per_op_stats(raw):
     parsed_per_op_stats = {}
     for stat in raw:
-        data = re.match(r'\t\s+(?P<op_name>[A-Z]+): (?P<op_counters>.+)', stat)
+        data = re.match(r'\t\s*(?P<op_name>[A-Z_]+): (?P<op_counters>.+)', stat)
         if data.group('op_name') in NFS_OP_LIST:
             parsed_counter_values = {}
             for index, counter in enumerate(data.group('op_counters').split(' ')):
@@ -83,7 +83,7 @@ def parse_proc_mountstats(mount_points, path):
             mount_info = raw_device[0].split(' ')
             if len(mount_info) > 6:
                 mount_point, fstype = mount_info[3], mount_info[6]
-                if mount_point in mount_points and fstype == 'nfs':
+                if mount_point in mount_points and re.match(r'^nfs4?', fstype):
                     device_data[mount_point] = parse_nfs_attrs(raw_device[1:])
             else:
                 collectd.error('Unexpected mount information line length')

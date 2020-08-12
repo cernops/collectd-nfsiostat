@@ -57,7 +57,7 @@ class NFSIoStatTest(unittest.TestCase):
         collectd_nfsiostat.NFS_OP_LIST = None
 
     @patch('collectd.Values')
-    def test_read_ok_rhel7(self, mock_values):
+    def test_read_ok_rhel7_nfsv3(self, mock_values):
         collectd_nfsiostat.config_func(generate_config('t/input/RHEL7', ('/mnt/foo',), ('READ',)))
         collectd_nfsiostat.read_func()
         assert mock_values.call_count == 5
@@ -73,7 +73,23 @@ class NFSIoStatTest(unittest.TestCase):
         )
 
     @patch('collectd.Values')
-    def test_read_ok_rhel8(self, mock_values):
+    def test_read_ok_rhel7_nfsv4(self, mock_values):
+        collectd_nfsiostat.config_func(generate_config('t/input/RHEL7_nfsv4', ('/mnt/nfs4',), ('EXCHANGE_ID',)))
+        collectd_nfsiostat.read_func()
+        assert mock_values.call_count == 5
+        mock_values.assert_has_calls(
+            [
+                call(plugin='nfsiostat', type='ops', plugin_instance='mnt_nfs4', type_instance='EXCHANGE_ID', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_nfs4', type_instance='EXCHANGE_ID', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='queue', plugin_instance='mnt_nfs4', type_instance='EXCHANGE_ID', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_nfs4', type_instance='EXCHANGE_ID', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='execute', plugin_instance='mnt_nfs4', type_instance='EXCHANGE_ID', meta={'schema_version': 1}),
+            ],
+            any_order=True
+        )
+
+    @patch('collectd.Values')
+    def test_read_ok_rhel8_nfsv3(self, mock_values):
         collectd_nfsiostat.config_func(generate_config('t/input/RHEL8', ('/mnt/bar',), ('ACCESS', 'READLINK')))
         collectd_nfsiostat.read_func()
         assert mock_values.call_count == 12
@@ -96,7 +112,24 @@ class NFSIoStatTest(unittest.TestCase):
         )
 
     @patch('collectd.Values')
-    def test_read_ok_rhel7_multi(self, mock_values):
+    def test_read_ok_rhel8_nfsv4(self, mock_values):
+        collectd_nfsiostat.config_func(generate_config('t/input/RHEL8_nfsv4', ('/mnt/nfsv4',), ('LOCKU',)))
+        collectd_nfsiostat.read_func()
+        assert mock_values.call_count == 6
+        mock_values.assert_has_calls(
+            [
+                call(plugin='nfsiostat', type='ops', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='timeouts', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='queue', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='rtt', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='execute', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+                call(plugin='nfsiostat', type='errs', plugin_instance='mnt_nfsv4', type_instance='LOCKU', meta={'schema_version': 1}),
+            ],
+            any_order=True
+        )
+
+    @patch('collectd.Values')
+    def test_read_ok_rhel7_nfsv3_multi(self, mock_values):
         collectd_nfsiostat.config_func(generate_config('t/input/RHEL7_multi', ('/mnt/foo', '/mnt/foo2'), ('READ',)))
         collectd_nfsiostat.read_func()
         assert mock_values.call_count == 10
