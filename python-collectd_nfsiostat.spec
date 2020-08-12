@@ -2,7 +2,7 @@
 
 Summary:   Collectd plugin for NFS mounts
 Name:      python-%{package_name}
-Version:   0.0.2
+Version:   0.0.3
 Release:   1%{?dist}
 BuildArch: noarch
 Source:    %{name}-%{version}.tgz
@@ -66,6 +66,9 @@ install -D -p -m 644 resources/nfsiostat_types.db \
 %endif
 
 %changelog
+* Wed Aug 12 2020 Nacho Barrientos <nacho.barrientos@cern.ch> 0.0.3-1
+- Add NFSv4 support.
+
 * Tue Aug 11 2020 Nacho Barrientos <nacho.barrientos@cern.ch> 0.0.2-1
 - Improve bogus configuration handling.
 - Improve input sanitisation and checks.
